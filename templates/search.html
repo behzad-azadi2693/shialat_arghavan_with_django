@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block meta_description %}
+فروش و عرضه کلیه محصولات شیرآلات ارغوان در مشهد دفتر نمایندگی و تولیدی شرآلات ارغوان در مشهد نشانی بلوار پیامبراعظم
+{% endblock meta_description %}
+
+{% block meta_keywords %}
+,شیرآلات صنعتی,شیرآلات ساختمانی,شیرآلات کلاسیک,شیرآلات شیک,شیرآلات ارغوان,محصولات ارغوان,شیرآلات ارغوان در مشهد
+{% endblock meta_keywords %}
+
+{% block title %} محصولات {% endblock %}
+
+{% block body %}
+    <!-- Start Featured Product -->
+
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    {% if products %}
+                        <h1 class="h1"> محصولات ارغوان</h1>
+                    {% else %}
+                        <h1 style="color:tomato" class="h1"> برای جستجوی شما چیزی یافت نشد </h1>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+            {% for pro in products %}
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img src="{{ pro.image.url }}" style="height:300px" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    {% for i in pro.ranking_range %}
+                                        <i class="text-warning fa fa-star"></i>
+                                    {% endfor %}
+                                </li>
+                                <li class="text-muted text-right">﷼{{ pro.price|intcomma:False }}</li>
+                            </ul>
+                            <a href="{% url 'shop:product' pro.slug %}" class="h2 text-decoration-none text-dark">{{ pro.name }}</a>
+                            <p class="card-text">
+                                {{ pro.description|truncatechars:100 }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- End Featured Product -->
+
+{% endblock %}

@@ -1,0 +1,67 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_description %}
+راه ارتباطی مشتریان شرکت و واحد فروش و تولید شیرآلات ارغوان دفتر نمایندگی رسمی در مشهد نشانی بلوار پیامبر اعظم
+{% endblock meta_description %}
+
+{% block meta_keywords %}
+ارتباط با ما ,ارتباط با شیرالات ارغوان,راه ارتباطی ,راه ارتباطی شیرآلات ارغوان واقع در مشهد
+{% endblock meta_keywords %}
+
+{% block title %} راه ارتباطی با ما {% endblock %}
+
+{% block body %}
+    <!-- Start Content Page -->
+    <div class="container-fluid bg-light py-5">
+        <div class="col-md-6 m-auto text-center">
+            <h1 class="h1">ارتباط با شیرآلات ارغوان</h1>
+            <ul class="list-unstyled text-light footer-link-list">
+                <li>
+                    <i class="fas fa-map-marker-alt fa-fw"></i>
+                    <a href="#">
+                    مشهد-بزرگراه پیامبراعظم-پیامبراعظم۷۳-آزادی ۱۲۷/۶-پلاک۲۲
+                    </a>
+                </li>
+                <li>
+                    <i class="fa fa-phone fa-fw"></i>
+                    <a class="text-decoration-none" href="tel:">۰۵۱-۳۶۵۱۲۹۷۷</a>
+                </li>
+                <li>
+                    <i class="fa fa-phone fa-fw"></i>
+                    <a class="text-decoration-none" href="tel:09155187155">۰۹۱۵۵۱۸۷۱۵۵</a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Start Contact -->
+    <div class="container py-5">
+        <div class="row py-5">
+            <form class="col-md-9 m-auto" method="post" role="form" novalidate>
+                <div class="row">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="inputname">{{ field.label }}:</label>
+                            {{ field }}
+                            <h5 style="color:tomato">{{ field.errors }}</h5>
+                        </div>
+                   {% endfor %}
+                </div>
+               
+                <div class="row">
+                    <div class="col text-end mt-2">
+                        <button type="submit" class="btn btn-success btn-lg px-3">ارسال پیغام</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Contact -->
+
+        {{ map|safe }}
+{% endblock %}

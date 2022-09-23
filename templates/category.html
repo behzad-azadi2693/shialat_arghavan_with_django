@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_description %}
+فروش و عرضه کلیه محصولات شیرآلات ارغوان در مشهد دفتر نمایندگی و تولیدی شرآلات ارغوان در مشهد نشانی بلوار پیامبراعظم
+{% endblock meta_description %}
+
+{% block meta_keywords %}
+    {% for cat in categories %}
+        {{ cat.name }}
+    {% endfor %}
+{% endblock meta_keywords %}
+
+{% block title %}  دسته بندی {% endblock %}
+
+{% block body %}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+            {% for cat in categories %}
+                <div class="col-md-4">
+                    <div class="card mb-4 product-wap rounded-0">
+                        <div class="card rounded-0">
+                            <img class="card-img rounded-0 img-fluid"  style="height:300px" src="{{ cat.image.url }}">
+                        </div>
+                        <div class="card-body text-center">
+                            <a href="{% url 'shop:category' cat.name %}" class="h3 text-decoration-none">{{ cat.name }}</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Content -->
+{% endblock %}
