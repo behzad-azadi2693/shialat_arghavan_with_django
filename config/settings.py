@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-h#%wasbdl^e7yos7ij$nyf80^nwl#t*q)%kh0z!1g09lj)p)19
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['', 'www.']
 
 
 # Application definition
@@ -76,12 +76,18 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'name_db',
+            'USER': 'name_user',
+            'PASSWORD': 'password',
+            'PORT': 3306,
+            'HOST': 'localhost',
+            'OPTIONS':{
+             'sql_mode':'STRICT_ALL_TABLES'
+            }
+        }
     }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -121,7 +127,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = '/home/arghavan/public_html/static'
+STATIC_ROOT = '/home/<host name>/public_html/static'
 
 
 STATICFILES_DIRS = [
@@ -130,9 +136,30 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = 'media/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_ROOT = '/home/arghavan/public_html/media'
+MEDIA_ROOT = '/home/<host name>/public_html/media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+'''haccess
+
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+AddCharset UTF-8  .py
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://www.doomain-name/$1 [R,L]
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+'''
+
+''' passenger_wsgi.py
+
+import os
+import sys
+from config import wsgi
+
+
+application = wsgi.application
+'''
